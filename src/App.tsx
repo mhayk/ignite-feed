@@ -6,6 +6,37 @@ import styles from './App.module.css'
 
 import "./global.css"
 
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: 'https://github.com/mhayk.png',
+      name: 'Mhayk Whandson',
+      role: 'Software Developer'
+    },
+    content: [
+      { type: 'paragraph', content: 'Hello guys 👋' },
+      { type: 'paragraph', content: 'I\'m a software developer and I love to write code.' },
+      { type: 'link', content: 'mhayk.com' },
+    ],
+    publishedAt: new Date('2022-07-08 16:30:00'),
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: 'https://github.com/mhayk.png',
+      name: 'Mhaylson Whandson',
+      role: 'Software Developer'
+    },
+    content: [
+      { type: 'paragraph', content: 'Hello guys 👋' },
+      { type: 'paragraph', content: 'I\'m a software developer and I love to write code.' },
+      { type: 'link', content: 'mhayk.com' },
+    ],
+    publishedAt: new Date('2022-07-08 16:30:00'),
+  }
+]
+
 function App() {
   return (
     <div>
@@ -13,10 +44,16 @@ function App() {
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {
+            posts.map(post => (
+              <Post
+                key={post.id}
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}
+              />
+            ))
+          }
         </main>
       </div>
     </div>
