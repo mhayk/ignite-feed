@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from 'date-fns'
 import enGB from 'date-fns/locale/en-GB'
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
@@ -13,7 +13,7 @@ interface PostProps {
         role: string;
     },
     content: {
-        type: string;
+        type: 'paragraph' | 'link';
         content: string;
     }[];
     publishedAt: Date;
@@ -43,7 +43,7 @@ export function Post({ author, publishedAt, content }: PostProps) {
     //     minute: '2-digit',
     // }).format(publishedAt)
 
-    function handleCreateNewComment() {
+    function handleCreateNewComment(event: FormEvent) {
         event?.preventDefault()
 
         const newCommentText = event.target.comment.value
@@ -53,12 +53,12 @@ export function Post({ author, publishedAt, content }: PostProps) {
         setNewCommentText('')
     }
 
-    function handleNewCommentChange() {
+    function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
         event.target.setCustomValidity('')
         setNewCommentText(event.target.value)
     }
 
-    function handleNewCommentInvalid() {
+    function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
         event.target.setCustomValidity('Comment cannot be empty')
     }
 
