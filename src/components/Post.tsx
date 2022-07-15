@@ -54,7 +54,12 @@ export function Post({ author, publishedAt, content }: PostProps) {
     }
 
     function handleNewCommentChange() {
+        event.target.setCustomValidity('')
         setNewCommentText(event.target.value)
+    }
+
+    function handleNewCommentInvalid() {
+        event.target.setCustomValidity('Comment cannot be empty')
     }
 
     function deleteComment(commentToDelete: string) {
@@ -106,6 +111,8 @@ export function Post({ author, publishedAt, content }: PostProps) {
                     placeholder='Leave a comment...'
                     value={newCommentText}
                     onChange={handleNewCommentChange}
+                    onInvalid={handleNewCommentInvalid}
+                    required
                 />
 
                 <footer>
